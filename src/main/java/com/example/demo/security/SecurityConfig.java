@@ -9,8 +9,8 @@ public class SecurityConfig {
 
 
     @Bean
-    public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        String[] allowedPaths = { "/", "/login", "/logout", "/register" };
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        String[] allowedPaths = { "/", "/login", "/logout", "/register"};
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(allowedPaths).permitAll()
