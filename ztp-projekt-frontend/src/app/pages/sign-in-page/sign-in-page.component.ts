@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {UsersService} from "../../users/users.service";
+// import {UsersService} from "../../users/users.service";
 import {
   AbstractControl,
   FormBuilder,
@@ -9,9 +9,9 @@ import {
   ValidatorFn,
   Validators
 } from "@angular/forms";
-import {UserDto} from "../../users/model/UserDto";
+// import {UserDto} from "../../users/model/UserDto";
 import {Router} from "@angular/router";
-import {AuthService} from "../../auth/auth.service";
+// import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-sign-in-page',
@@ -31,26 +31,26 @@ export class SignInPageComponent {
   });
 
   constructor(
-    private userService: UsersService,
+    // private userService: UsersService,
     private fb: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    // private authService: AuthService
   ) {
   }
 
   handleSignInButton() {
-     let newUser: UserDto = {
-       email: this.signForm.controls['email'].value,
-       password: this.signForm.controls['password'].value,
-       name: this.signForm.controls['name'].value,
-       surname: this.signForm.controls['surname'].value
-     }
-      this.userService.registerNewUser(newUser)
-        .then(() => {
-          this.authService.login(this.signForm.controls['email'].value, this.signForm.controls['password'].value)
-            .then(()=>{
-              this.router.navigate(['/']).then()
-            });
-        })
+     // let newUser: UserDto = {
+     //   email: this.signForm.controls['email'].value,
+     //   password: this.signForm.controls['password'].value,
+     //   name: this.signForm.controls['name'].value,
+     //   surname: this.signForm.controls['surname'].value
+     // }
+      // this.userService.registerNewUser(newUser)
+      //   .then(() => {
+      //     this.authService.login(this.signForm.controls['email'].value, this.signForm.controls['password'].value)
+      //       .then(()=>{
+      //         this.router.navigate(['/']).then()
+      //       });
+      //   })
   }
 }

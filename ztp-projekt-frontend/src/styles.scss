@@ -1,1 +1,60 @@
 /* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files */
+@import "primeng/resources/primeng.css";
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeflex/primeflex";
+//@import "assets/theme.css";
+
+html, body{
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.layout-wrapper {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+
+  .layout-sideMenu {
+    width: 0;
+    overflow: hidden !important;
+    flex-grow: 0;
+    transition: 0.5s;
+    flex-shrink: 0;
+  }
+
+  .layout-sideMenu-open {
+    width: 300px !important;
+    border-right: 1px solid #dee2e6;
+  }
+
+  .layout-content-wrapper {
+    flex-grow: 1;
+    overflow: auto;
+
+    .layout-content {
+      height: 94%;
+      padding: 20px;
+    }
+  }
+}
+
+.layout-topbar{
+  position: unset !important;
+  height:5%
+}
+
+::ng-deep .p-dialog .p-dialog-header{
+  font-weight: bold !important;
+  color: #FFCE1FFF;
+}
