@@ -1,0 +1,136 @@
+.layout-topbar {
+  background: var(--surface-overlay);
+  min-height: 3rem;
+  padding: 0 2rem;
+  border-bottom: 1px solid var(--surface-border);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-color);
+  transition: transform 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99);
+}
+.layout-topbar .topbar-left {
+  display: flex;
+  align-items: center;
+}
+.layout-topbar .topbar-left .horizontal-logo {
+  display: none;
+}
+.layout-topbar .menu-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  text-align: center;
+  color: var(--text-color);
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  background: var(--surface-ground);
+  transition: background-color 0.2s, 0.2s;
+  display: block;
+  cursor: pointer;
+  outline: 0 none;
+}
+.layout-topbar .menu-button:hover {
+  background: var(--surface-hover);
+}
+.layout-topbar .menu-button:focus {
+  box-shadow: var(--focus-ring);
+}
+.layout-topbar .menu-button i {
+  line-height: inherit;
+  font-size: 1.5rem;
+}
+.layout-topbar .topbar-separator {
+  display: block;
+  width: 1px;
+  border-left: 1px solid var(--surface-border);
+  align-self: stretch;
+  margin: 0 1rem;
+}
+.layout-topbar .mobile-logo {
+  display: none;
+}
+.layout-topbar .viewname {
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+.layout-topbar .topbar-menu {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+}
+.layout-topbar .topbar-menu > li {
+  margin-left: 1rem;
+  position: relative;
+}
+.layout-topbar .topbar-menu > li:first {
+  margin-left: 0;
+}
+.layout-topbar .topbar-menu > li.profile-item {
+  padding: 0 1rem 0 1rem;
+  border-left: 1px solid var(--surface-border);
+  border-right: 1px solid var(--surface-border);
+}
+.layout-topbar .topbar-menu > li.profile-item > a {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0 0.5rem 0 0;
+}
+.layout-topbar .topbar-menu > li.profile-item .profile-image {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 0.5rem;
+}
+.layout-topbar .topbar-menu > li.right-sidebar-item > a {
+  background: var(--surface-ground);
+}
+.layout-topbar .topbar-menu > li > a {
+  width: 2.5rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  text-align: center;
+  color: var(--text-color);
+  overflow: hidden;
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s, box-shadow 0.2s;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  user-select: none;
+  outline: 0 none;
+}
+.layout-topbar .topbar-menu > li > a:hover {
+  background: var(--surface-hover);
+}
+.layout-topbar .topbar-menu > li > a:focus {
+  box-shadow: var(--focus-ring);
+}
+.layout-topbar .topbar-menu > li > a i {
+  line-height: inherit;
+  font-size: 1.5rem;
+}
+.layout-topbar .topbar-menu > li > a .topbar-badge {
+  position: absolute;
+  display: block;
+  right: 0;
+  top: 0;
+  width: 1rem;
+  height: 1rem;
+  line-height: 1rem;
+  font-size: 0.714rem;
+  border-radius: 50%;
+  font-weight: 600;
+  background: var(--primary-color);
+  color: var(--primary-color-text);
+}
