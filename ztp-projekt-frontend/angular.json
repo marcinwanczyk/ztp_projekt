@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ztp-projekt-frontend:build:production"
+              "buildTarget": "ztp-projekt-frontend:build:production"
             },
             "development": {
-              "browserTarget": "ztp-projekt-frontend:build:development"
+              "buildTarget": "ztp-projekt-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ztp-projekt-frontend:build"
+            "buildTarget": "ztp-projekt-frontend:build"
           }
         },
         "test": {
