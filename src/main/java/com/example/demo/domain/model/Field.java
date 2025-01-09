@@ -1,6 +1,6 @@
 package com.example.demo.domain.model;
 
-import jakarta.annotation.Generated;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,13 +10,22 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "fields")
 public class Field {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int field_no; // boiska nr 1, 2, 3...
-    private String type; // kosz, noga, siata....
+    private String type;
+    @Column(name = "field_no")
+    private int field_no;
+
+    public Field() {
+    }
+
+    public Field(String type, int field_no) {
+        this.type = type;
+        this.field_no = field_no;
+    }
 
     public Long getId() {
         return id;
@@ -24,14 +33,6 @@ public class Field {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public int getField_no() {
-        return field_no;
-    }
-
-    public void setField_no(int field_no) {
-        this.field_no = field_no;
     }
 
     public String getType() {
@@ -42,5 +43,11 @@ public class Field {
         this.type = type;
     }
 
+    public int getField_no() {
+        return field_no;
+    }
 
+    public void setField_no(int field_no) {
+        this.field_no = field_no;
+    }
 }
