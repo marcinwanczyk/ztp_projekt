@@ -1,0 +1,79 @@
+<div class="container">
+  <form class="card" [formGroup]="signForm">
+    <h3>Formularz rejestracji</h3>
+    <hr>
+    <div class="formgrid grid">
+      <div class="field col-12 md:col-12">
+        <label for="email">Email</label>
+        <input
+          pInputText
+          formControlName="email"
+          id="email"
+          type="text"
+          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+        >
+        <small *ngIf="signForm.controls['email'].invalid && signForm.controls['email'].touched"> Pole wypełnione
+          niepoprawnie lub niewypełnione </small>
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="password">Hasło</label>
+        <input
+          formControlName="password"
+          id="password"
+          type="password"
+          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+        >
+        <small *ngIf="signForm.controls['password'].invalid && signForm.controls['password'].touched"> Pole
+          wymagane </small>
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="password_confirm">Powtórz hasło</label>
+        <input
+          formControlName="passwordConfirm"
+          id="password_confirm"
+          type="password"
+          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+        >
+        <small
+          *ngIf="(signForm.controls['password'].value != signForm.controls['passwordConfirm'].value) && signForm.controls['passwordConfirm'].touched"
+        > Hasła nie są takie same</small>
+
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="name">Imię</label>
+        <input
+          formControlName="name"
+          id="name"
+          type="text"
+          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+        >
+        <small *ngIf="signForm.controls['name'].invalid && signForm.controls['name'].touched"> Pole wymagane </small>
+
+      </div>
+      <div class="field col-12 md:col-6">
+        <label for="surname">Nazwisko</label>
+        <input
+          formControlName="surname"
+          id="surname"
+          type="text"
+          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+        >
+        <small *ngIf="signForm.controls['surname'].invalid && signForm.controls['surname'].touched"> Pole
+          wymagane </small>
+
+      </div>
+    </div>
+    <div class="button-container flex justify-content-center">
+      <button
+        pButton
+        class="align-self-center"
+        (click)="handleSignInButton()"
+        [disabled]="signForm.invalid">Zarejestruj się
+      </button>
+    </div>
+  </form>
+</div>
+
+
+
+
