@@ -3,6 +3,7 @@
 @import "primeng/resources/primeng.css";
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeflex/primeflex";
+@import "primeicons/primeicons.css";
 //@import "assets/theme.css";
 
 html, body{
@@ -40,11 +41,12 @@ body {
 
   .layout-content-wrapper {
     flex-grow: 1;
-    overflow: auto;
+    overflow: unset;
 
     .layout-content {
       height: 94%;
       padding: 20px;
+      overflow: auto;
     }
   }
 }

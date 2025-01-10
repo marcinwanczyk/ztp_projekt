@@ -1,0 +1,14 @@
+  <div class="p-grid fields-container">
+    <div class="col-4 md-4 clickable-field" *ngFor="let field of filteredFields">
+      <p-card >
+        <ng-template pTemplate="header">
+          <img src="assets/basketball-court.jpg" alt="Basketball Court" class="field-image">
+        </ng-template>
+        <ng-template pTemplate="content">
+          <h2 style="color: var(--primary-color);">{{ field.type }}</h2>
+
+        </ng-template>
+      </p-card>
+    </div>
+  </div>
+

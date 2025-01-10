@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
-import {LayoutModule} from "./layout/layout.module";
+import {CommonModule} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -15,7 +15,6 @@ import {LayoutModule} from "./layout/layout.module";
     BrowserModule,
     AppRoutingModule,
     ToastModule,
-    LayoutModule
   ],
   providers: [{provide: MessageService, useClass: MessageService}],
   bootstrap: [AppComponent]
