@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import {ToastModule} from "primeng/toast";
 import {MessageService} from "primeng/api";
 import {CommonModule} from "@angular/common";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import {CommonModule} from "@angular/common";
     BrowserModule,
     AppRoutingModule,
     ToastModule,
+    BrowserAnimationsModule
   ],
   providers: [{provide: MessageService, useClass: MessageService}],
   bootstrap: [AppComponent]

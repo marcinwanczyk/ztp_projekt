@@ -138,4 +138,9 @@
 ::ng-deep .p-inputgroup-addon, .searchaddon{
   background-color: var(--text-color);
   padding: 0;
+  height: 60%;
+}
+
+::ng-deep .p-inputgroup, .searchaddon{
+  height:60%;
 }

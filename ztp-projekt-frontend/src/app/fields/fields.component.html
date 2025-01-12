@@ -1,5 +1,5 @@
-  <div class="p-grid fields-container">
-    <div class="col-4 md-4 clickable-field" *ngFor="let field of filteredFields">
+  <div class="grid fields-container">
+    <div class="col-6 md:col-4 lg:col-4 clickable-field" *ngFor="let field of filteredFields" (click)="showReservation(field)">
       <p-card >
         <ng-template pTemplate="header">
           <img src="assets/basketball-court.jpg" alt="Basketball Court" class="field-image">

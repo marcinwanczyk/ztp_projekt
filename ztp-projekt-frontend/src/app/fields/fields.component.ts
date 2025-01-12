@@ -6,6 +6,8 @@ import {CommonModule} from "@angular/common";
 import {ButtonModule} from "primeng/button";
 import {SearchService} from "../layout/topbar/search.service";
 import {DividerModule} from "primeng/divider";
+import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
+import {ReservationComponent} from "../reservation/reservation.component";
 
 @Component({
   selector: 'app-fields',
@@ -17,16 +19,19 @@ import {DividerModule} from "primeng/divider";
     DividerModule
   ],
   templateUrl: './fields.component.html',
-  styleUrl: './fields.component.scss'
+  styleUrl: './fields.component.scss',
+  providers: [DialogService]
 })
 export class FieldsComponent implements OnInit {
-
   fields: Field[] = [];
   searchTerm: string = '';
   filteredFields: Field[] = [];
+
+  dialogRef?: DynamicDialogRef;
   constructor(
     private fieldsService: FieldsService,
-    private searchService: SearchService
+    private searchService: SearchService,
+    private dialogService: DialogService
   ) {
   }
 
@@ -47,6 +52,16 @@ export class FieldsComponent implements OnInit {
     } else {
       this.filteredFields = this.fields;
     }
+  }
+
+  showReservation(field: Field) {
+    this.dialogRef = this.dialogService.open(ReservationComponent,
+      {
+        header: field.type,
+        data: { id: field.id }
+      }
+    )
+
   }
 }
 
