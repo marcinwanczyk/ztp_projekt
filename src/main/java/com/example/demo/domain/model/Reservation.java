@@ -24,21 +24,18 @@ public class Reservation {
 
     private int reservation_no;
     private LocalDate date;
-    private LocalDate startTime;
-    private LocalDate endTime;
-
 
     public Reservation() {
     }
 
-    public Reservation(User user, Field field, int reservation_no, LocalDate date, LocalDate startTime, LocalDate endTime) {
+    public Reservation(User user, Field field, int reservation_no, LocalDate date, LocalDate startTime,
+            LocalDate endTime) {
         this.user = user;
         this.field = field;
         this.reservation_no = reservation_no;
         this.date = date;
-        this.startTime = startTime;
-        this.endTime = endTime;
     }
+
     public User getUser() {
         return user;
     }
@@ -78,21 +75,4 @@ public class Reservation {
     public void setDate(LocalDate date) {
         this.date = date;
     }
-
-    public LocalDate getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDate startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalDate getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDate endTime) {
-        this.endTime = endTime;
-    }
-
 }

@@ -26,23 +26,21 @@ public class ReservationService {
         this.fieldRepository = fieldRepository;
         this.userRepository = userRepository;
     }
+
     // testowe dodanie rezerwacji
-    public Reservation testReservation(){
+    public Reservation testReservation() {
         User user = new User();
         user.setUsername("konstanty");
         user.setEmail("123malpa@gmail.com");
-        user.setPassword( "potrzymajmipiwo");
+        user.setPassword("potrzymajmipiwo");
         userRepository.save(user);
-        
+
         Field field = fieldRepository.findById(1L).orElse(null);
 
         Reservation reservation = new Reservation();
         reservation.setUser(user);
         reservation.setField(field);
         reservation.setDate(java.time.LocalDate.now());
-        reservation.setStartTime(java.time.LocalDate.now());
-        reservation.setEndTime(java.time.LocalDate.now());
-
         return reservationRepository.save(reservation);
     }
 
