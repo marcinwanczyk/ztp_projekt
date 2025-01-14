@@ -1,15 +1,28 @@
 import { Injectable } from '@angular/core';
 import {Field} from "./Field";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FieldsService {
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+  ) {
+  }
 
-  getFields(): Field[]{
-    return fields
+  getFields(): Promise<Field[]> {
+    return new Promise<Field[]>((resolve, reject) => {
+        this.http.get<Field[]>('http://localhost:8080/fields').subscribe({
+          next: (fields: Field[]) => {
+            resolve(fields);
+          }, error: (err) => {
+            reject(err);
+          }
+        })
+      }
+    )
   }
 }
 const fields: Field[] = [

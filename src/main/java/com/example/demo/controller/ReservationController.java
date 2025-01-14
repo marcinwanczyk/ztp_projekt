@@ -20,16 +20,16 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-    @GetMapping
-    public String getReservations(Model model){
-        List<Reservation> reservations = reservationService.getReservations();
-        model.addAttribute("reservations", reservations);
-        return "reservations";
-    }
-
-
-    @GetMapping
-    public Reservation getTestReservatioString(){
-        return reservationService.testReservation();
-    }
+//    @GetMapping
+//    public String getReservations(Model model){
+//        List<Reservation> reservations = reservationService.getReservations();
+//        model.addAttribute("reservations", reservations);
+//        return "reservations";
+//    }
+//
+//
+//    @GetMapping
+//    public Reservation getTestReservatioString(){
+//        return reservationService.testReservation();
+//    }
 }

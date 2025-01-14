@@ -1,24 +1,19 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup, FormsModule, Validators} from "@angular/forms";
-// import {ConfigService} from "../../config/config.service";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {Router} from "@angular/router";
-// import {AuthService} from "../../auth/auth.service";
-import {async, Subscription} from "rxjs";
+import { Subscription} from "rxjs";
 import {UiHelperService} from "../../ui-helper.service";
+import {AuthService} from "../../auth/auth.service";
+import {CommonModule} from "@angular/common";
 import {Button} from "primeng/button";
 import {DividerModule} from "primeng/divider";
-import {CommonModule} from "@angular/common";
+import {InputTextModule} from "primeng/inputtext";
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   standalone: true,
-  imports: [
-    Button,
-    FormsModule,
-    DividerModule,
-    CommonModule
-  ],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, Button, DividerModule, InputTextModule],
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent implements OnInit, OnDestroy{
@@ -31,36 +26,34 @@ export class LoginPageComponent implements OnInit, OnDestroy{
   submitted = false;
 
   constructor(
-    // private authService: AuthService,
+    private authService: AuthService,
     private router: Router,
     private uiHelper: UiHelperService
   ) {
   }
 
   ngOnInit() {
-    this.uiHelper.handleError("cos", "Wprowadzono błędny email lub hasło");
-
     this.subs.push(
-      // this.authService.getAuth().subscribe((authDetails) =>{
-      //   if(authDetails.isLoggedIn){
-      //     this.router.navigate(["/"]).then();
-      //   }
-      // })
+      this.authService.getAuth().subscribe((authDetails) =>{
+        if(authDetails.isLoggedIn){
+          this.router.navigate(["/"]).then();
+        }
+      })
     )
   }
 
   onSubmit() {
     this.submitted = true;
-    // if(this.login && this.password)
-    //   this.authService.login(this.login, this.password).then(
-    //     async (authDetails) =>{
-    //       if(authDetails?.isLoggedIn) {
-    //         this.router.navigate(["/"]).then()
-    //       }
-    //     }
-    //   ).catch( (reason) => {
-    //       this.uiHelper.handleError(reason, "Wprowadzono błędny email lub hasło");
-    //   })
+    if(this.login && this.password)
+      this.authService.login(this.login, this.password).then(
+        async (authDetails) =>{
+          if(authDetails?.isLoggedIn) {
+            this.router.navigate(["/fields"]).then()
+          }
+        }
+      ).catch( (reason) => {
+          this.uiHelper.handleError(reason, "Wprowadzono błędny email lub hasło");
+      })
   }
 
   ngOnDestroy(): void {

@@ -15,6 +15,17 @@
         <small *ngIf="signForm.controls['email'].invalid && signForm.controls['email'].touched"> Pole wypełnione
           niepoprawnie lub niewypełnione </small>
       </div>
+      <div class="field col-12 md:col-12">
+        <label for="username">Użytkownik</label>
+        <input
+          formControlName="username"
+          id="username"
+          type="text"
+          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+        >
+        <small *ngIf="signForm.controls['username'].invalid && signForm.controls['username'].touched"> Pole wymagane </small>
+
+      </div>
       <div class="field col-12 md:col-6">
         <label for="password">Hasło</label>
         <input
@@ -39,29 +50,7 @@
         > Hasła nie są takie same</small>
 
       </div>
-      <div class="field col-12 md:col-6">
-        <label for="name">Imię</label>
-        <input
-          formControlName="name"
-          id="name"
-          type="text"
-          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-        >
-        <small *ngIf="signForm.controls['name'].invalid && signForm.controls['name'].touched"> Pole wymagane </small>
 
-      </div>
-      <div class="field col-12 md:col-6">
-        <label for="surname">Nazwisko</label>
-        <input
-          formControlName="surname"
-          id="surname"
-          type="text"
-          class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
-        >
-        <small *ngIf="signForm.controls['surname'].invalid && signForm.controls['surname'].touched"> Pole
-          wymagane </small>
-
-      </div>
     </div>
     <div class="button-container flex justify-content-center">
       <button

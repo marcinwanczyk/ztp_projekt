@@ -35,8 +35,8 @@ export class FieldsComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
-    this.fields = this.fieldsService.getFields();
+  async ngOnInit() {
+    this.fields = await this.fieldsService.getFields();
     this.filteredFields = this.fields;
     this.searchService.search$.subscribe(term => {
       this.searchTerm = term;

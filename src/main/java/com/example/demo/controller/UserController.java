@@ -1,16 +1,58 @@
-// package com.example.demo.controller;
+package com.example.demo.controller;
 
-// import org.springframework.web.bind.annotation.GetMapping;
-// // import org.springframework.web.bind.annotation.ResponseBody;
-// import org.springframework.web.bind.annotation.RestController;
+import com.example.demo.domain.model.User;
+import com.example.demo.service.UserService;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
-// @RestController
-// public class UserController {
-//     @GetMapping("/home")
-//     // @ResponseBody
-//     public String home() {
-//         return "Welcome to the home page!";
-//         // return "home"; zwroci widok langing pejdza
-//     }
+import java.util.Optional;
 
-// }
+@RestController
+@RequestMapping("/user")
+public class UserController {
+
+    private final PasswordEncoder passwordEncoder;
+    private final UserService userService;
+
+    public UserController(PasswordEncoder passwordEncoder, UserService userService) {
+        this.passwordEncoder = passwordEncoder;
+        this.userService = userService;
+    }
+
+    @GetMapping("/home")
+    @ResponseBody
+    public String home() {
+        return "Welcome to the home page!";
+    }
+
+    @PostMapping("")
+    public User saveNewUser(
+            @RequestBody() User newUserDto
+    ){
+        this.validateNewUserEmail(newUserDto.getEmail());
+        this.validateNewUserEmail(newUserDto.getUsername());
+        User newUser = User.builder()
+                .email(newUserDto.getEmail())
+                .password(passwordEncoder.encode(newUserDto.getPassword()))
+                .username(newUserDto.getUsername())
+                .build();
+        return this.userService.saveNewUser(newUser);
+    }
+
+    private void validateNewUserEmail(String email){
+        Optional<User> existingUser = this.userService.findUserByEmail(email);
+
+        if(existingUser.isPresent())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "EMAIL_ALREADY_EXIST");
+    }
+
+    private void validateNewUserUsername(String username){
+        Optional<User> existingUser = this.userService.findUserByUsername(username);
+
+        if(existingUser.isPresent())
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "USERNAME_ALREADY_EXIST");
+    }
+
+}
