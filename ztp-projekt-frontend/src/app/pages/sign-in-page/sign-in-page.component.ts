@@ -1,21 +1,19 @@
 import {Component} from '@angular/core';
 // import {UsersService} from "../../users/users.service";
 import {
-  AbstractControl,
   FormBuilder,
   FormControl,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn,
+  FormGroup, FormsModule, ReactiveFormsModule,
   Validators
 } from "@angular/forms";
-// import {UserDto} from "../../users/model/UserDto";
 import {Router} from "@angular/router";
-// import {AuthService} from "../../auth/auth.service";
+import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-sign-in-page',
   templateUrl: './sign-in-page.component.html',
+  standalone: true,
+  imports: [FormsModule, ReactiveFormsModule, CommonModule],
   styleUrls: ['./sign-in-page.component.scss']
 })
 export class SignInPageComponent {
