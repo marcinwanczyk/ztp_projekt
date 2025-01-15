@@ -28,18 +28,19 @@ public class ReservationController {
     public Reservation createReservation(@RequestParam Long userId,
             @RequestParam Long fieldId,
             @RequestParam int reservationNo,
-            @RequestParam String reservationDate) {
-        LocalDate date = LocalDate.parse(reservationDate);
-        return reservationService.createReservation(userId, fieldId, reservationNo, date);
-    }
+            @RequestParam LocalDate reservationDate) {
+                
+        return reservationService.createReservation(userId, fieldId, reservationNo, reservationDate);
+        }
 
-    @GetMapping
-    @ResponseBody
-    public List<Reservation> getReservations() {
+        @GetMapping
+        @ResponseBody
+        public List<Reservation> getReservations() {
         List<Reservation> reservations = reservationService.getReservations();
+        LocalDate today = LocalDate.now();
         return reservations.stream()
-                .filter(reservation -> reservation.getDate().isAfter(LocalDate.now()))
-                .collect(Collectors.toList());
+            .filter(reservation -> reservation.getDate().isAfter(today.minusDays(1)))
+            .collect(Collectors.toList());
     }
 
 }
