@@ -28,8 +28,7 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(User user, Field field, int reservation_no, LocalDate date, LocalDate startTime,
-            LocalDate endTime) {
+    public Reservation(User user, Field field, int reservation_no, LocalDate date) {
         this.user = user;
         this.field = field;
         this.reservation_no = reservation_no;
