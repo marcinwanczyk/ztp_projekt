@@ -1,6 +1,8 @@
 package com.example.demo.service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -27,21 +29,15 @@ public class ReservationService {
         this.userRepository = userRepository;
     }
 
-    // testowe dodanie rezerwacji
-    public Reservation testReservation() {
-        User user = new User();
-        user.setUsername("konstanty");
-        user.setEmail("123malpa@gmail.com");
-        user.setPassword("potrzymajmipiwo");
-        userRepository.save(user);
-
-        Field field = fieldRepository.findById(1L).orElse(null);
-
-        Reservation reservation = new Reservation();
-        reservation.setUser(user);
-        reservation.setField(field);
-        reservation.setDate(java.time.LocalDate.now());
-        return reservationRepository.save(reservation);
+    public Reservation createReservation(Long userId, Long fieldId, int reservation_no, LocalDate reservationTime) {
+        Optional<Field> field = fieldRepository.findById(fieldId);
+        Optional<User> user = userRepository.findById(userId);
+        if (user.isPresent() && field.isPresent()) {
+            Reservation reservation = new Reservation(user.get(), field.get(), reservation_no, reservationTime);
+            return reservationRepository.save(reservation);
+        } else {
+            return null;
+        }
     }
 
     public List<Reservation> getReservations() {
