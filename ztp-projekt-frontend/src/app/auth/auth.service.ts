@@ -23,6 +23,7 @@ export class AuthService {
   }
 
   public getAuth(): Observable<AuthDetails>{
+    console.log("getAuth")
     // @ts-ignore
     return this.authChangeEventEmitter.asObservable().pipe(
       filter(value => value !== null)

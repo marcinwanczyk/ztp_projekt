@@ -1,0 +1,31 @@
+
+<div class="grid col-12 flex-row justify-content-between">
+  <div class="col-6 flex-row grid justify-content-between" *ngIf="date && fieldWithReservations">
+    <div class="col-5" *ngFor="let time of [7,8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]">
+        <div class="grid flex-row h-1rem">
+          <button
+            pButton
+            [class]="timeSlots[time] ? 'p-button-danger p-button-sm col-12' : 'p-button-sm col-12'"
+            [disabled]="timeSlots[time]"
+            [label]="timeSlots[time] ? time + ':00 Zarezerwowane' : time + ':00 Rezerwuj'"></button>
+        </div>
+
+    </div>
+  </div>
+
+  <div class="col-6 flex justify-content-center align-content-center">
+    <p-calendar
+      class=""
+      [(ngModel)]="date"
+      [inline]="true"
+      [minDate]="minDate"
+      [maxDate]="maxDate"
+      [dateFormat]="'YYYY-MM-DD'"
+      (ngModelChange)="setTimeSlots()"
+    />
+  </div>
+
+</div>
+
+
+

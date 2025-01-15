@@ -8,9 +8,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
 @Table(name = "reservations")
+@Data
 public class Reservation {
 
     @Id
@@ -24,6 +26,8 @@ public class Reservation {
 
     private int reservation_no;
     private LocalDate date;
+
+    private Integer time;
 
     public Reservation() {
     }

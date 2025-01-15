@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import java.util.List;
 
+import com.example.demo.domain.model.FieldWithReservations;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +13,7 @@ import com.example.demo.domain.model.Field;
 import com.example.demo.service.FieldService;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/fields")
 public class HomeController{
 
     private FieldService fieldService;
@@ -21,13 +22,13 @@ public class HomeController{
         this.fieldService = fieldService;
         }
 
-        @GetMapping("/")
-        public List<Field> home(){
-        return fieldService.getFields();
-        }
-    
-    @GetMapping("/fields/{id}")
-    public Field fieldDetails(@PathVariable Long id){
+    @GetMapping("")
+    public List<Field> home(){
+    return fieldService.getFields();
+    }
+
+    @GetMapping("/{id}")
+    public FieldWithReservations fieldDetails(@PathVariable Long id){
         return fieldService.getFieldById(id);
     }
 

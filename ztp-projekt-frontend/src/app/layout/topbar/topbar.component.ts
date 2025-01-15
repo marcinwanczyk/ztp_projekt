@@ -9,6 +9,7 @@ import {InputGroupAddonModule} from "primeng/inputgroupaddon";
 import {InputTextModule} from "primeng/inputtext";
 import {CommonModule} from "@angular/common";
 import {SearchService} from "./search.service";
+import {AuthService} from "../../auth/auth.service";
 
 @Component({
   selector: 'app-topbar',
@@ -34,6 +35,7 @@ export class TopbarComponent implements OnDestroy{
     private router: Router,
     private route: ActivatedRoute,
     private searchService: SearchService,
+    private authService: AuthService
   ) {
     this.subs.push(
       this.router.events.pipe(
@@ -57,4 +59,11 @@ export class TopbarComponent implements OnDestroy{
     this.searchService.setSearchTerm(event.target.value);
   }
 
+  onLogoutClick() {
+    this.authService.logout().then(() => {  this.router.navigate(['/login'])});
+  }
+
+  onFieldsButtonClick() {
+    this.router.navigate(['/fields']).then();
+  }
 }

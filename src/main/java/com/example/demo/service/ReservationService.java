@@ -1,7 +1,12 @@
 package com.example.demo.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -42,6 +47,20 @@ public class ReservationService {
 
     public List<Reservation> getReservations() {
         return reservationRepository.findAll();
+    }
+
+    public Map<LocalDate, List<Integer>> getReservationsByFieldId(Long fieldId) {
+        List<Reservation> reservations = reservationRepository.findReservationsByFieldId(fieldId);
+        reservations = reservations
+                .stream().filter(reservation -> reservation.getDate().isAfter(java.time.LocalDate.now())
+                        || reservation.getDate().isEqual(java.time.LocalDate.now() ))
+                .toList();
+
+        Map<LocalDate, List<Integer>> reservationsMap = new HashMap<>();
+        reservations.forEach(reservation ->
+                reservationsMap.computeIfAbsent(reservation.getDate(), k -> new ArrayList<>()).add(reservation.getTime())
+        );
+        return reservationsMap;
     }
 
 }

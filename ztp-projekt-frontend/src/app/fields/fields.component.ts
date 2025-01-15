@@ -8,6 +8,7 @@ import {SearchService} from "../layout/topbar/search.service";
 import {DividerModule} from "primeng/divider";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {ReservationComponent} from "../reservation/reservation.component";
+import {FieldComponent} from "./field/field.component";
 
 @Component({
   selector: 'app-fields',
@@ -55,10 +56,13 @@ export class FieldsComponent implements OnInit {
   }
 
   showReservation(field: Field) {
-    this.dialogRef = this.dialogService.open(ReservationComponent,
+    this.dialogRef = this.dialogService.open(FieldComponent,
       {
-        header: field.type,
-        data: { id: field.id }
+        header: field.type + " " + field.field_no,
+        data: { id: field.id },
+        width: "1000px",
+        height: "550px",
+        contentStyle: {"align-items": "center", "display": "flex", "justify-content": "center"}
       }
     )
 

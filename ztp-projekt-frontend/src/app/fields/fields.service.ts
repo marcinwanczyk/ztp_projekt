@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Field} from "./Field";
+import {Field, FieldWithReservations} from "./Field";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
@@ -14,7 +14,7 @@ export class FieldsService {
 
   getFields(): Promise<Field[]> {
     return new Promise<Field[]>((resolve, reject) => {
-        this.http.get<Field[]>('http://localhost:8080/fields').subscribe({
+        this.http.get<Field[]>('http://localhost:8080/fields', {withCredentials: true}).subscribe({
           next: (fields: Field[]) => {
             resolve(fields);
           }, error: (err) => {
@@ -23,6 +23,18 @@ export class FieldsService {
         })
       }
     )
+  }
+
+  getFieldWithReservations(id: number): Promise<FieldWithReservations> {
+    return new Promise<FieldWithReservations>((resolve, reject) => {
+      this.http.get<FieldWithReservations>(`http://localhost:8080/fields/${id}`, {withCredentials: true}).subscribe({
+        next: (fieldWithReservations: FieldWithReservations) => {
+          resolve(fieldWithReservations);
+        }, error: (err) => {
+          reject(err);
+        }
+      })
+    })
   }
 }
 const fields: Field[] = [

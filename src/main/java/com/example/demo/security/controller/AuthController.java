@@ -40,7 +40,7 @@ public class AuthController {
         }
     }
 
-    @PostMapping("logout")
+    @PostMapping("/logout")
     public void logout(HttpSession httpSession){
         httpSession.invalidate();
     }

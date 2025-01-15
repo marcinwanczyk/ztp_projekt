@@ -3,22 +3,25 @@ import { RouterModule, Routes } from '@angular/router';
 import {LayoutComponent} from "./layout/layout.component";
 import {MAIN_ROUTES} from "./main/main.routes";
 import {IsUserLoggedInGuard} from "./auth/is-user-logged-in.guard";
+import {MainComponent} from "./main/main.component";
+import {authGuard} from "./auth/auth.guard";
 
 const routes: Routes = [
   {path: '',
     component: LayoutComponent,
-    // canActivate: [IsUserLoggedInGuard],
+    canActivate: [authGuard],
     children: [
       {
-        path: 'main',
-        loadComponent: () => import('./main/main.component').then((m) => m.MainComponent)
-      },
-      {
-        path: 'fields',
-        loadComponent: () => import('./fields/fields.component').then((m) => m.FieldsComponent)
+        path: '',
+        component: MainComponent,
+        children: [
+          {
+            path: 'fields',
+            loadComponent: () => import('./fields/fields.component').then((m) => m.FieldsComponent)
+          }
+        ]
       },
     ],
-
   },
   {
     path: 'login',
@@ -32,6 +35,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+
 })
 export class AppRoutingModule { }
