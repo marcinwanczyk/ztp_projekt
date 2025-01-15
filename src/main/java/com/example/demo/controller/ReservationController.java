@@ -28,8 +28,7 @@ public class ReservationController {
     public Reservation createReservation(@RequestParam Long userId,
             @RequestParam Long fieldId,
             @RequestParam int reservationNo,
-            @RequestParam LocalDate reservationDate) {
-                
+            @RequestParam LocalDate reservationDate) {   
         return reservationService.createReservation(userId, fieldId, reservationNo, reservationDate);
         }
 
