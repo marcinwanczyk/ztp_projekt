@@ -19,15 +19,13 @@ public class HomeController{
 
     public HomeController(FieldService fieldService){
         this.fieldService = fieldService;
-    }
+        }
 
-    @GetMapping("/")
-    public String home(Model model){
-        List<Field> fields = fieldService.getFields();
-        model.addAttribute("fields", fields);
-        return "home"; //zwroci widok langing pejdza
-    }
-
+        @GetMapping("/")
+        public List<Field> home(){
+        return fieldService.getFields();
+        }
+    
     @GetMapping("/fields/{id}")
     public Field fieldDetails(@PathVariable Long id){
         return fieldService.getFieldById(id);
