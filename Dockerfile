@@ -1,6 +1,6 @@
-FROM openjdk:21-jdk
+FROM openjdk:23-jdk
 
-COPY target/ztp_projekt.jar .
+COPY target/ztp_projekt.jar ztp_projekt.jar
 
 EXPOSE 8080
 
