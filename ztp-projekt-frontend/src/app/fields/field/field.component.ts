@@ -7,6 +7,10 @@ import {FieldsService} from "../fields.service";
 import {CommonModule, JsonPipe, NgIf} from "@angular/common";
 import {TableModule} from "primeng/table";
 import {PanelModule} from "primeng/panel";
+import {ReservationsService} from "../../reservation/reservations.service";
+import {UiHelperService} from "../../ui-helper.service";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {ConfirmationService} from "primeng/api";
 
 @Component({
   selector: 'app-field',
@@ -17,10 +21,12 @@ import {PanelModule} from "primeng/panel";
     JsonPipe,
     TableModule,
     CommonModule,
-    PanelModule
+    PanelModule,
+    ConfirmDialogModule
   ],
   templateUrl: './field.component.html',
-  styleUrl: './field.component.scss'
+  styleUrl: './field.component.scss',
+  providers: [ConfirmationService]
 })
 export class FieldComponent {
   id?: number;
@@ -31,14 +37,24 @@ export class FieldComponent {
   fieldWithReservations?: FieldWithReservations;
   constructor(public ref: DynamicDialogRef,
               public config: DynamicDialogConfig,
-              public fieldsService: FieldsService
+              public fieldsService: FieldsService,
+              private reservationService: ReservationsService,
+              private uiHelper: UiHelperService,
+              private confirmationService: ConfirmationService
   ) {
     this.id = config.data.id
     const today = new Date();
     this.minDate = new Date();
     this.maxDate = new Date(today.setDate(today.getDate() + 7));
-    if(this.id){
-       this.fieldsService.getFieldWithReservations(this.id).then((data) =>{this.fieldWithReservations = data});
+       this.resetFieldReservations();
+  }
+
+  private resetFieldReservations() {
+    if(this.id) {
+      this.fieldsService.getFieldWithReservations(this.id).then((data) => {
+        this.fieldWithReservations = data;
+        this.setTimeSlots()
+      });
     }
   }
 
@@ -60,7 +76,6 @@ export class FieldComponent {
 
     if(!dateKey || !this.fieldWithReservations) return;
     if(this.fieldWithReservations.reservations && !this.fieldWithReservations.reservations[dateKey]) {
-      console.log("tutaj")
       this.fieldWithReservations.reservations[dateKey] = [];
     }
 
@@ -74,5 +89,26 @@ export class FieldComponent {
     for (let key in this.timeSlots) {
       this.timeSlots[key] = false;
     }
+  }
+
+  reserveField(time: number) {
+    this.confirmationService.confirm({
+      message: `Czy chcesz zarezerwować obiekt ${this.fieldWithReservations?.field.type} ${this.fieldWithReservations?.field.field_no} w terminie ${this.date?.toISOString().slice(0, 10)} ${time}:00?`,
+      header: 'Potwierdzenie rezerwacji',
+      acceptButtonStyleClass: 'p-button-success',
+      acceptLabel: 'Tak',
+      acceptIcon: 'pi pi-check',
+      rejectButtonStyleClass: 'p-button-danger',
+      rejectLabel: 'Nie',
+      rejectIcon: 'pi pi-times',
+      accept: () => {
+        if(this.id && this.date) {
+          this.reservationService.reserveField(this.id, this.date.toISOString().slice(0, 10), time).then(() => {
+            this.uiHelper.showMessageOperationSuccesful("Zarezerwowano pomyślnie");
+            this.resetFieldReservations()
+          })
+      }}
+    })
+
   }
 }

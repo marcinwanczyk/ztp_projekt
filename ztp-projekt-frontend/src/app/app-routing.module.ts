@@ -7,20 +7,15 @@ import {MainComponent} from "./main/main.component";
 import {authGuard} from "./auth/auth.guard";
 
 const routes: Routes = [
-  {path: '',
+  {
+    path: '',
     component: LayoutComponent,
     canActivate: [authGuard],
     children: [
-      {
-        path: '',
-        component: MainComponent,
-        children: [
           {
             path: 'fields',
             loadComponent: () => import('./fields/fields.component').then((m) => m.FieldsComponent)
           }
-        ]
-      },
     ],
   },
   {

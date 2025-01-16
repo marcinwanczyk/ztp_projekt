@@ -10,6 +10,10 @@ import {InputTextModule} from "primeng/inputtext";
 import {CommonModule} from "@angular/common";
 import {SearchService} from "./search.service";
 import {AuthService} from "../../auth/auth.service";
+import {UiHelperService} from "../../ui-helper.service";
+import {OverlayPanelModule} from "primeng/overlaypanel";
+import {Reservation} from "../../reservation/Reservation";
+import {ReservationsService} from "../../reservation/reservations.service";
 
 @Component({
   selector: 'app-topbar',
@@ -22,6 +26,7 @@ import {AuthService} from "../../auth/auth.service";
     InputTextModule,
     InputGroupModule,
     InputGroupAddonModule,
+    OverlayPanelModule,
   ],
   styleUrls: ['./topbar.component.scss']
 })
@@ -30,12 +35,15 @@ export class TopbarComponent implements OnDestroy{
 
   showSearchBar: boolean = false;
   searchFields: string = '';
+  username: string | null = null;
+  reservations: Reservation[] = []
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private searchService: SearchService,
-    private authService: AuthService
+    private authService: AuthService,
+    private uiHelper: UiHelperService,
+    private reservationService: ReservationsService
   ) {
     this.subs.push(
       this.router.events.pipe(
@@ -47,8 +55,12 @@ export class TopbarComponent implements OnDestroy{
         filter(event => event instanceof NavigationStart)
       ).subscribe((event) => {
         this.searchFields = '';
+      }),
+      this.authService.getAuth().subscribe((auth) => {
+        this.username = auth.username;
       })
     )
+    this.reservationService.getReservationsForUser().then((reservations) => { this.reservations = reservations });
   }
 
   ngOnDestroy() {
@@ -60,7 +72,11 @@ export class TopbarComponent implements OnDestroy{
   }
 
   onLogoutClick() {
-    this.authService.logout().then(() => {  this.router.navigate(['/login'])});
+    this.subs.forEach(sub => sub.unsubscribe());
+    this.authService.logout().then(() => {
+      this.uiHelper.showMessageOperationSuccesful("Wylogowano");
+      this.router.navigate(['/login'])
+    });
   }
 
   onFieldsButtonClick() {

@@ -7,7 +7,9 @@
             pButton
             [class]="timeSlots[time] ? 'p-button-danger p-button-sm col-12' : 'p-button-sm col-12'"
             [disabled]="timeSlots[time]"
-            [label]="timeSlots[time] ? time + ':00 Zarezerwowane' : time + ':00 Rezerwuj'"></button>
+            [label]="timeSlots[time] ? time + ':00 Zarezerwowane' : time + ':00 Rezerwuj'"
+            (click)="reserveField(time)"
+          ></button>
         </div>
 
     </div>
@@ -24,8 +26,10 @@
       (ngModelChange)="setTimeSlots()"
     />
   </div>
-
 </div>
+
+<p-confirmDialog></p-confirmDialog>
+
 
 
 

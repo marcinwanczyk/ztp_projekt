@@ -2,17 +2,22 @@ package com.example.demo.domain.model;
 
 import java.time.LocalDate;
 
+import jakarta.annotation.Nullable;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 @Entity
 @Table(name = "reservations")
 @Data
+@Builder
+@AllArgsConstructor
 public class Reservation {
 
     @Id
@@ -24,7 +29,6 @@ public class Reservation {
     @ManyToOne
     private Field field;
 
-    private int reservation_no;
     private LocalDate date;
 
     private Integer time;
@@ -32,12 +36,6 @@ public class Reservation {
     public Reservation() {
     }
 
-    public Reservation(User user, Field field, int reservation_no, LocalDate date) {
-        this.user = user;
-        this.field = field;
-        this.reservation_no = reservation_no;
-        this.date = date;
-    }
 
     public User getUser() {
         return user;
@@ -61,14 +59,6 @@ public class Reservation {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public int getReservationNo() {
-        return reservation_no;
-    }
-
-    public void setReservationNo(int reservation_no) {
-        this.reservation_no = reservation_no;
     }
 
     public LocalDate getDate() {

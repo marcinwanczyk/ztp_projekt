@@ -9,11 +9,9 @@ export const authGuard: CanActivateFn = async (route, state) => {
   const uiHelper = inject(UiHelperService);
   const router = inject(Router);
   let auth = await authService.checkAuth();
-  if (!auth.isLoggedIn) {
-    // uiHelper.handleError("UNAUTHORIZED", "Wystąpił błąd autoryzacji.").then();
-    router.navigate(['/login']).then();
+  if(!auth.isLoggedIn){
+    await router.navigate(['/login']);
     return false;
   }
-
   return true;
 };

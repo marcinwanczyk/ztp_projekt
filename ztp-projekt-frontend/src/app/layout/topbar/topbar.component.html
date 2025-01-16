@@ -16,17 +16,17 @@
   <div class="topbar-right">
     <ul class="topbar-menu">
       <li class="static sm:relative">
-        <p-button styleClass="p-button-text p-button-sm" label="Wszystkie obiekty" icon="pi pi-users" (click)="onFieldsButtonClick()"></p-button>
+        <p-button styleClass="p-button-text p-button-sm" label="Wszystkie obiekty"  (click)="onFieldsButtonClick()"></p-button>
       </li>
       <li class="static sm:relative">
-        <p-button styleClass="p-button-text p-button-sm" label="Moje rezerwacje" icon="pi pi-calendar"></p-button>
+        <p-button styleClass="p-button-text p-button-sm" label="Moje rezerwacje" (click)="op.toggle($event)" icon="pi pi-calendar"></p-button>
       </li>
 
       <li class="profile-item static sm:relative">
         <a tabindex="0" pStyleClass="@next" enterClass="hidden" enterActiveClass="scalein" leaveToClass="hidden"
            leaveActiveClass="fadeout" [hideOnOutsideClick]="true">
           <i class="pi pi-user mr-3"></i>
-          <span class="profile-name">test</span>
+          <span class="profile-name">{{username}}</span>
         </a>
         <ul
           class="list-none p-3 m-0 border-round shadow-2 absolute surface-overlay hidden origin-top w-full sm:w-12rem mt-2 right-0 top-auto">
@@ -45,7 +45,9 @@
     </ul>
   </div>
 </div>
-
+<p-overlayPanel #op>
+  {{reservations |json}}
+</p-overlayPanel>
 <!--<p-progressBar-->
 <!--  [mode]="'indeterminate'"-->
 <!--  [ngClass]="['main-progress-bar', loadingIndicatorOn ? 'progress-bar-visible' : 'progress-bar-hidden']"-->
