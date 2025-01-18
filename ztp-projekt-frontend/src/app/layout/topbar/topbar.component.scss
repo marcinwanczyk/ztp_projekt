@@ -144,3 +144,37 @@
 ::ng-deep .p-inputgroup, .searchaddon{
   height:60%;
 }
+
+.reservation-table {
+  width: 100%;
+  max-width: 800px;
+  //border-collapse: collapse; /* Ensure borders are shared between cells */
+}
+
+.reservation-table th,
+.reservation-table td {
+  padding: 10px 20px; /* Add space between columns */
+  //border: 1px solid var(--surface-border); /* Add border to cells */
+
+}
+
+.reservation-table th {
+  text-align: left;
+}
+
+::ng-deep .p-overlaypanel {
+  width: 100%;
+  max-width: 800px;
+}
+
+.table-wrapper {
+  max-height: 300px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+.reservation-table thead {
+  position: sticky;
+  top: 0;
+  background-color: white; /* Ensure the header has a background */
+  z-index: 1; /* Ensure the header is above the table body */
+}

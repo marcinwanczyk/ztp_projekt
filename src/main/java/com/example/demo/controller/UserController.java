@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.domain.dto.NewUserDto;
 import com.example.demo.domain.model.User;
 import com.example.demo.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -21,15 +22,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/home")
-    @ResponseBody
-    public String home() {
-        return "Welcome to the home page!";
-    }
-
     @PostMapping("")
     public User saveNewUser(
-            @RequestBody() User newUserDto
+            @RequestBody() NewUserDto newUserDto
     ){
         this.validateNewUserEmail(newUserDto.getEmail());
         this.validateNewUserEmail(newUserDto.getUsername());

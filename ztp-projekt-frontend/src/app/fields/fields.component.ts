@@ -7,7 +7,6 @@ import {ButtonModule} from "primeng/button";
 import {SearchService} from "../layout/topbar/search.service";
 import {DividerModule} from "primeng/divider";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
-import {ReservationComponent} from "../reservation/reservation.component";
 import {FieldComponent} from "./field/field.component";
 
 @Component({
@@ -48,7 +47,7 @@ export class FieldsComponent implements OnInit {
   filterFields() {
     if (this.searchTerm) {
       this.filteredFields = this.fields.filter(field =>
-        field.type.toLowerCase().includes(this.searchTerm.toLowerCase())
+        (field.type.toLowerCase() + ` ${field.field_no}`).includes(this.searchTerm.toLowerCase())
       );
     } else {
       this.filteredFields = this.fields;

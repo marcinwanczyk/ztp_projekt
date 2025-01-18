@@ -70,4 +70,7 @@ public class ReservationService {
         return reservationsMap;
     }
 
+    public void deleteReservation(Long id) {
+        reservationRepository.deleteById(id);
+    }
 }

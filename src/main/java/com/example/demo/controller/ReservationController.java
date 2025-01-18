@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.example.demo.domain.dto.NewReservationDto;
+import com.example.demo.domain.dto.ReservationDto;
 import com.example.demo.security.dto.SecurityUserDetails;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +36,7 @@ public class ReservationController {
     }
 
     @GetMapping("user")
-    public List<Reservation> getReservationsForUser(
+    public List<ReservationDto> getReservationsForUser(
             Authentication authentication
     ) {
         Object principal = authentication.getPrincipal();
@@ -45,9 +46,19 @@ public class ReservationController {
         }
         List<Reservation> reservations = reservationService.getReservationsForUser(userId);
         LocalDate today = LocalDate.now();
+        List<ReservationDto> reservationDtos = reservations.stream()
+                .filter(reservation -> reservation.getDate().isAfter(today.minusDays(1)))
+                .map(ReservationDto::fromReservation)
+                .toList();
         return reservations.stream()
-            .filter(reservation -> reservation.getDate().isAfter(today.minusDays(1)))
-            .collect(Collectors.toList());
+                    .filter(reservation -> reservation.getDate().isAfter(today.minusDays(1)))
+                    .map(ReservationDto::fromReservation)
+                    .toList();
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteReservation(@PathVariable Long id) {
+        reservationService.deleteReservation(id);
     }
 
 }

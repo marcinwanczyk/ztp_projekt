@@ -1,7 +1,8 @@
 :host {
   display: flex;
   justify-content: center;
-  //width: 1300px;
+  max-width: 1500px;
+  flex-grow: 1;
 }
 .fields-container {
   display: flex;

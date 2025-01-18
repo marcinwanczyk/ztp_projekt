@@ -48,7 +48,7 @@ export class LoginPageComponent implements OnInit, OnDestroy{
       this.authService.login(this.login, this.password).then(
         async (authDetails) =>{
           if(authDetails?.isLoggedIn) {
-            this.router.navigate(["/fields"]).then()
+            this.router.navigate(["/"]).then()
           }
         }
       ).catch( (reason) => {

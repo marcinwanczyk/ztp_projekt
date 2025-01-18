@@ -7,6 +7,7 @@ import {SidebarModule} from "primeng/sidebar";
 import {RouterModule} from "@angular/router";
 import {ButtonModule} from "primeng/button";
 import {TopbarComponent} from "./topbar/topbar.component";
+import {FieldsComponent} from "../fields/fields.component";
 
 @Component({
   selector: 'app-layout',
@@ -18,7 +19,7 @@ import {TopbarComponent} from "./topbar/topbar.component";
     RippleModule,
     SidebarModule,
     RouterModule,
-    ButtonModule, TopbarComponent],
+    ButtonModule, TopbarComponent, FieldsComponent],
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent {

@@ -26,7 +26,6 @@ export class IsUserLoggedInGuard implements CanActivate{
     state: RouterStateSnapshot):Promise<boolean | UrlTree> {
 
     let auth = await firstValueFrom(this.authService.getAuth());
-    console.log("GUARD")
     if (!auth.isLoggedIn){
      await this.uiHelper.handleError("UNAUTHORIZED", "Wystąpił błąd autoryzacji.").then();
       await this.router.navigate(['login'])

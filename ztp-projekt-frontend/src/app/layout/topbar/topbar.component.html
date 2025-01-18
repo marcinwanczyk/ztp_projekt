@@ -1,7 +1,7 @@
 <div class="layout-topbar p-0">
   <div class="topbar-left">
 <!--    <a routerLink="/" class="p-4"> <i class="pi pi-home"></i></a>-->
-    <div class="searchbar p-2" *ngIf="showSearchBar">
+    <div class="searchbar p-2">
       <p-inputGroup >
         <input pInputText placeholder="Szukaj obiektu" (input)="onSearchChange($event)"/>
         <p-inputGroupAddon class="searchaddon">
@@ -45,10 +45,31 @@
     </ul>
   </div>
 </div>
-<p-overlayPanel #op>
-  {{reservations |json}}
+<p-overlayPanel #op (onShow)="onOverlayToggle()">
+  <div class="table-wrapper">
+    <p-table [value]="reservations" class="reservation-table" [scrollable]="true" scrollHeight="300px">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Obiekt</th>
+          <th>Data i godzina</th>
+          <th></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-reservation>
+        <tr>
+          <td>{{ reservation.fieldType }} {{ reservation.fieldNo }}</td>
+          <td>{{ reservation.date }} {{ reservation.time }}:00</td>
+          <td>
+            <button
+              pButton
+              icon="pi pi-times"
+              class="p-button-danger p-button-sm p-button-text"
+              (click)="deleteReservation(reservation.id)"
+            ></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
 </p-overlayPanel>
-<!--<p-progressBar-->
-<!--  [mode]="'indeterminate'"-->
-<!--  [ngClass]="['main-progress-bar', loadingIndicatorOn ? 'progress-bar-visible' : 'progress-bar-hidden']"-->
-<!--&gt;</p-progressBar>-->
+<p-confirmDialog></p-confirmDialog>

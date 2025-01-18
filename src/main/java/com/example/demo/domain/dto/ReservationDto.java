@@ -17,9 +17,7 @@ import java.time.LocalDate;
 public class ReservationDto {
 
     private Long id;
-
-    private User user;
-
+    private Long userId;
     private Long fieldId;
     private String fieldType;
     private Integer fieldNo;
@@ -28,7 +26,8 @@ public class ReservationDto {
 
     public static ReservationDto fromReservation(Reservation reservation){
         return ReservationDto.builder()
-                .user(reservation.getUser())
+                .id(reservation.getId())
+                .userId(reservation.getUser().getId())
                 .fieldId(reservation.getField().getId())
                 .fieldType(reservation.getField().getType())
                 .fieldNo(reservation.getField().getField_no())

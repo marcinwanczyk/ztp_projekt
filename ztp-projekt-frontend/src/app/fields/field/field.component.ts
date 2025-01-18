@@ -30,7 +30,7 @@ import {ConfirmationService} from "primeng/api";
 })
 export class FieldComponent {
   id?: number;
-  date: Date = new Date();
+  date: string = new Date().toLocaleDateString('en-CA') ;
   minDate: Date;
   maxDate: Date;
   timeSlots: { [key: number]: boolean } = { 7: false,8: false, 9: false, 10: false, 11: false, 12: false, 13: false, 14: false, 15: false, 16: false, 17: false, 18: false, 19: false, 20: false, 21: false, 22: false };
@@ -58,20 +58,10 @@ export class FieldComponent {
     }
   }
 
-  checkButtonDisabled(time: number) {
-    const dateKey = this.date?.toISOString().slice(0, 10);
-    console.log("dateKey: ", dateKey);
-
-    if (dateKey && this.fieldWithReservations && this.fieldWithReservations.reservations[dateKey]?.length > 0) {
-      return this.fieldWithReservations.reservations[dateKey].includes(time);
-    }else {
-      return false;
-    }
-  }
 
   setTimeSlots() {
-    const dateKey = this.date?.toLocaleDateString('en-CA');
-    console.log("dateKey: ", dateKey);
+    // this.date = this.date?.toLocaleDateString('en-CA') ? this.date : new Date();
+    const dateKey = this.date;
     this.resetTimeSlots();
 
     if(!dateKey || !this.fieldWithReservations) return;
@@ -81,7 +71,6 @@ export class FieldComponent {
 
     for (let key in this.timeSlots) {
       this.timeSlots[key] = this.fieldWithReservations.reservations[dateKey].includes(parseInt(key));
-      console.log([key, this.timeSlots[key]]);
     }
   }
 
@@ -93,7 +82,7 @@ export class FieldComponent {
 
   reserveField(time: number) {
     this.confirmationService.confirm({
-      message: `Czy chcesz zarezerwować obiekt ${this.fieldWithReservations?.field.type} ${this.fieldWithReservations?.field.field_no} w terminie ${this.date?.toISOString().slice(0, 10)} ${time}:00?`,
+      message: `Czy chcesz zarezerwować obiekt ${this.fieldWithReservations?.field.type} ${this.fieldWithReservations?.field.field_no} w terminie ${this.date} ${time}:00?`,
       header: 'Potwierdzenie rezerwacji',
       acceptButtonStyleClass: 'p-button-success',
       acceptLabel: 'Tak',
@@ -103,7 +92,7 @@ export class FieldComponent {
       rejectIcon: 'pi pi-times',
       accept: () => {
         if(this.id && this.date) {
-          this.reservationService.reserveField(this.id, this.date.toISOString().slice(0, 10), time).then(() => {
+          this.reservationService.reserveField(this.id, this.date, time).then(() => {
             this.uiHelper.showMessageOperationSuccesful("Zarezerwowano pomyślnie");
             this.resetFieldReservations()
           })

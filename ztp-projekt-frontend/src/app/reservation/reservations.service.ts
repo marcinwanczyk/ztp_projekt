@@ -40,7 +40,18 @@ export class ReservationsService {
           }
         });
     });
-
   }
 
+  deleteReservation(reservationId: number){
+    return new Promise<void>((resolve, reject) => {
+      this.http.delete<void>(`http://localhost:8080/reservations/${reservationId}`, {withCredentials: true})
+        .subscribe({
+          next: (res) => {
+            resolve(res);
+          }, error: (err) => {
+            reject(err);
+          }
+        });
+    });
+  }
 }

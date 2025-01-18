@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import java.util.List;
 
 import com.example.demo.domain.model.FieldWithReservations;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,11 +13,11 @@ import com.example.demo.service.FieldService;
 
 @RestController
 @RequestMapping("/fields")
-public class HomeController{
+public class FieldsController {
 
     private FieldService fieldService;
 
-    public HomeController(FieldService fieldService){
+    public FieldsController(FieldService fieldService){
         this.fieldService = fieldService;
         }
 

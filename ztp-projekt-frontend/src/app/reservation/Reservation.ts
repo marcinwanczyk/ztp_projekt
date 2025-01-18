@@ -1,9 +1,10 @@
-import {Field} from "../fields/Field";
 
 export interface Reservation {
   id: number;
-  field: Field;
-  reservationDate: string;
-  reservationTime: number;
   userId: number;
+  fieldId: number;
+  fieldType: string;
+  fieldNo: number;
+  date: string; // Use string to represent LocalDate
+  time: number;
 }

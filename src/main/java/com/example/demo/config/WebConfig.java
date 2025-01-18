@@ -45,6 +45,8 @@ public class WebConfig implements WebMvcConfigurer {
                         .requestMatchers(HttpMethod.GET, "/auth/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/user").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/user").permitAll()
+                        .requestMatchers("/v3/api-docs/**", "/swagger-resources/**", "/swagger-ui.html", "/webjars/**", "/swagger-ui/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session
